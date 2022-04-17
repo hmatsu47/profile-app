@@ -36,7 +36,7 @@ export default function Auth() {
               type="email"
               placeholder="Your email"
               value={email()}
-              onChange={(e) => setEmail(e.currentTarget.value)}
+              onChange={(e: any) => setEmail(e.target.value)}
             />
             <button className="button block" aria-live="polite">
               Send magic link

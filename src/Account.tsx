@@ -1,6 +1,7 @@
 import { Session } from '@supabase/supabase-js';
 import { createSignal, createEffect } from 'solid-js';
 import { supabase } from './supabaseClient';
+import Avatar from './Avatar'
 
 type Props = {
     key: string,
@@ -45,8 +46,8 @@ const Account = (props: Props) => {
     }
   }
 
-  const updateProfile = async (e: Event) => {
-    e.preventDefault();
+  const updateProfile = async (e: any) => {
+    // e.preventDefault();
 
     try {
       setLoading(true);
@@ -79,32 +80,46 @@ const Account = (props: Props) => {
       {loading() ? (
         'Saving ...'
       ) : (
-        <form onSubmit={updateProfile} className="form-widget">
-          <div>Email: {props.session.user!.email}</div>
-          <div>
-            <label htmlFor="username">Name</label>
-            <input
-              id="username"
-              type="text"
-              value={username() || ''}
-              onChange={(e) => setUsername(e.currentTarget.value)}
+        <>
+          <div className="form-widget">
+            {/* Add to the body */}
+            <Avatar
+              url={avatar_url()}
+              size={150}
+              onUpload={(url: string) => {
+                setAvatarUrl(url);
+                updateProfile({ username, website, avatar_url: url });
+              }}
             />
+            {/* ... */}
           </div>
-          <div>
-            <label htmlFor="website">Website</label>
-            <input
-              id="website"
-              type="url"
-              value={website() || ''}
-              onChange={(e) => setWebsite(e.currentTarget.value)}
-            />
-          </div>
-          <div>
-            <button className="button block primary" disabled={loading()}>
-              Update profile
+          <form onSubmit={updateProfile} className="form-widget">
+            <div>Email: {props.session.user!.email}</div>
+            <div>
+              <label htmlFor="username">Name</label>
+              <input
+                id="username"
+                type="text"
+                value={username() || ''}
+                onChange={(e: any) => setUsername(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="website">Website</label>
+              <input
+                id="website"
+                type="url"
+                value={website() || ''}
+                onChange={(e: any) => setWebsite(e.target.value)}
+              />
+            </div>
+            <div>
+              <button className="button block primary" disabled={loading()}>
+                Update profile
             </button>
-          </div>
-        </form>
+            </div>
+          </form>
+        </>
       )}
       <button type="button" className="button block" onClick={() => supabase.auth.signOut()}>
         Sign Out
