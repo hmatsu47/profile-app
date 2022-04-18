@@ -2,8 +2,8 @@ import { createSignal } from 'solid-js';
 import { supabase } from './supabaseClient';
 
 export default function Auth() {
-  const [loading, setLoading] = createSignal(false);
-  const [email, setEmail] = createSignal('');
+  const [loading, setLoading] = createSignal<boolean>(false);
+  const [email, setEmail] = createSignal<string>('');
 
   const handleLogin = async (e: Event) => {
     e.preventDefault();
@@ -36,7 +36,12 @@ export default function Auth() {
               type="email"
               placeholder="Your email"
               value={email()}
-              onChange={(e: any) => setEmail(e.target.value)}
+              onChange={(e) => {
+                if (!(e.target instanceof HTMLInputElement)) {
+                  return;
+                }
+                setEmail(e.target.value);
+              }}
             />
             <button className="button block" aria-live="polite">
               Send magic link

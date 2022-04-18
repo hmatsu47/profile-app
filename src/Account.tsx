@@ -4,15 +4,15 @@ import { supabase } from './supabaseClient';
 import Avatar from './Avatar'
 
 type Props = {
-    key: string,
-    session: Session
+  key: string,
+  session: Session
 }
 
 const Account = (props: Props) => {
   const [loading, setLoading] = createSignal<boolean>(true);
-  const [username, setUsername] = createSignal<string | null>(null);
-  const [website, setWebsite] = createSignal<string | null>(null);
-  const [avatar_url, setAvatarUrl] = createSignal<string | null>(null);
+  const [username, setUsername] = createSignal<string>('');
+  const [website, setWebsite] = createSignal<string>('');
+  const [avatar_url, setAvatarUrl] = createSignal<string>('');
 
   createEffect(() => {
     props.session;
@@ -46,8 +46,7 @@ const Account = (props: Props) => {
     }
   }
 
-  const updateProfile = async (e: any) => {
-    // e.preventDefault();
+  const updateProfile = async (e: object) => {
 
     try {
       setLoading(true);
@@ -82,7 +81,6 @@ const Account = (props: Props) => {
       ) : (
         <>
           <div className="form-widget">
-            {/* Add to the body */}
             <Avatar
               url={avatar_url()}
               size={150}
@@ -91,7 +89,6 @@ const Account = (props: Props) => {
                 updateProfile({ username, website, avatar_url: url });
               }}
             />
-            {/* ... */}
           </div>
           <form onSubmit={updateProfile} className="form-widget">
             <div>Email: {props.session.user!.email}</div>
@@ -101,7 +98,12 @@ const Account = (props: Props) => {
                 id="username"
                 type="text"
                 value={username() || ''}
-                onChange={(e: any) => setUsername(e.target.value)}
+                onChange={(e) => {
+                  if (!(e.target instanceof HTMLInputElement)) {
+                    return;
+                  }
+                  setUsername(e.target.value);
+                }}
               />
             </div>
             <div>
@@ -110,7 +112,12 @@ const Account = (props: Props) => {
                 id="website"
                 type="url"
                 value={website() || ''}
-                onChange={(e: any) => setWebsite(e.target.value)}
+                onChange={(e) => {
+                  if (!(e.target instanceof HTMLInputElement)) {
+                    return;
+                  }
+                  setWebsite(e.target.value);
+                }}
               />
             </div>
             <div>
