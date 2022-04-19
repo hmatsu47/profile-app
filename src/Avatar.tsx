@@ -31,15 +31,17 @@ export default (props: Props | null) => {
     }
   }
 
-  const uploadAvatar = async (event: any) => {
+  const uploadAvatar = async (event: Event) => {
     try {
       setUploading(true);
 
-      if (!event.target.files || event.target.files.length === 0) {
+      const target = event.target as HTMLInputElement;
+      const files = target.files as FileList;
+      if (files.length === 0) {
         throw new Error('You must select an image to upload.');
       }
 
-      const file = event.target.files[0];
+      const file = files[0];
       const fileExt = file.name.split('.').pop();
       const fileName = `${Math.random()}.${fileExt}`;
       const filePath = `${fileName}`;
