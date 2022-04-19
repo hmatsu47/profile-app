@@ -1,13 +1,14 @@
 import { Session } from '@supabase/supabase-js';
 import { createSignal, createEffect, Accessor } from 'solid-js';
 import { supabase } from './supabaseClient';
-import Avatar from './Avatar'
+import Avatar from './Avatar';
+import Note from './Note';
 
 type Props = {
   key: string,
   session: Session
 }
-type UploadParams = {
+type UpdateParams = {
   username: Accessor<string>,
   website: Accessor<string>,
   avatar_url: string
@@ -51,8 +52,7 @@ const Account = (props: Props) => {
     }
   }
 
-  const updateProfile = async (e: UploadParams | { submitter: HTMLElement; }) => {
-
+  const updateProfile = async (e: UpdateParams | { submitter: HTMLElement; }) => {
     try {
       setLoading(true);
       const user = supabase.auth.user();
@@ -102,7 +102,7 @@ const Account = (props: Props) => {
               <input
                 id="username"
                 type="text"
-                value={username() || ''}
+                value={username()}
                 onChange={(e) => {
                   if (!(e.target instanceof HTMLInputElement)) {
                     return;
@@ -116,7 +116,7 @@ const Account = (props: Props) => {
               <input
                 id="website"
                 type="url"
-                value={website() || ''}
+                value={website()}
                 onChange={(e) => {
                   if (!(e.target instanceof HTMLInputElement)) {
                     return;
@@ -128,9 +128,12 @@ const Account = (props: Props) => {
             <div>
               <button className="button block primary" disabled={loading()}>
                 Update profile
-            </button>
+              </button>
             </div>
           </form>
+          <div className="form-widget">
+            <Note />
+          </div>
         </>
       )}
       <button type="button" className="button block" onClick={() => supabase.auth.signOut()}>
