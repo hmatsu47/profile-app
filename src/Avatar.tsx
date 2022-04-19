@@ -1,4 +1,4 @@
-import { Accessor, createEffect, createSignal } from 'solid-js';
+import { createEffect, createSignal } from 'solid-js';
 import { supabase } from './supabaseClient';
 // import VisuallyHidden from '@reach/visually-hidden';
 type Props = {
