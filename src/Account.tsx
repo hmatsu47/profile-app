@@ -1,11 +1,16 @@
 import { Session } from '@supabase/supabase-js';
-import { createSignal, createEffect } from 'solid-js';
+import { createSignal, createEffect, Accessor } from 'solid-js';
 import { supabase } from './supabaseClient';
 import Avatar from './Avatar'
 
 type Props = {
   key: string,
   session: Session
+}
+type UploadParams = {
+  username: Accessor<string>,
+  website: Accessor<string>,
+  avatar_url: string
 }
 
 const Account = (props: Props) => {
@@ -46,7 +51,7 @@ const Account = (props: Props) => {
     }
   }
 
-  const updateProfile = async (e: object) => {
+  const updateProfile = async (e: UploadParams | { submitter: HTMLElement; }) => {
 
     try {
       setLoading(true);
