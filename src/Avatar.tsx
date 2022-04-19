@@ -1,12 +1,20 @@
-import { createEffect, createSignal } from 'solid-js';
+import { Accessor, createEffect, createSignal } from 'solid-js';
 import { supabase } from './supabaseClient';
 // import VisuallyHidden from '@reach/visually-hidden';
+type Props = {
+  url: string,
+  size: number,
+  onUpload: (url: string) => void
+}
 
-export default (props: any) => {
+export default (props: Props | null) => {
   const [avatarUrl, setAvatarUrl] = createSignal<string>('');
   const [uploading, setUploading] = createSignal<boolean>(false);
 
   createEffect(() => {
+    if (!props) {
+      return;
+    }
     if (props.url) downloadImage(props.url);
   })
 
@@ -42,6 +50,9 @@ export default (props: any) => {
         throw uploadError;
       }
 
+      if (!props) {
+        return;
+      }
       props.onUpload(filePath);
     } catch (error) {
       alert(error.message);
@@ -51,12 +62,12 @@ export default (props: any) => {
   }
 
   return (
-    <div style={{ width: props.size }} aria-live="polite">
+    <div style={{ width: props!.size }} aria-live="polite">
       <img
-        src={avatarUrl() !== '' ? avatarUrl() : `https://place-hold.it/${props.size}x${props.size}`}
+        src={avatarUrl() !== '' ? avatarUrl() : `https://place-hold.it/${props!.size}x${props!.size}`}
         alt={avatarUrl() !== '' ? 'Avatar' : 'No image'}
         className="avatar image"
-        style={{ height: props.size, width: props.size }}
+        style={{ height: props!.size, width: props!.size }}
       />
       {uploading() ? (
         'Uploading...'
