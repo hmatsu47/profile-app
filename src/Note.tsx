@@ -90,7 +90,7 @@ export default () => {
             </div>
             <div>
               <For each={notes()} fallback={<div></div>}>
-                {(note) => <div>{note}</div>}
+                {(note) => <div className="card">{note}</div>}
               </For>
             </div>
             <div>

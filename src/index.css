@@ -265,6 +265,7 @@ button.primary,
   border: var(--custom-border);
   border-radius: var(--custom-border-radius);
   padding: var(--custom-spacing);
+  margin-bottom: var(--custom-spacing);
 }
 
 .avatar {
