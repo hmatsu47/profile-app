@@ -3,7 +3,7 @@ import { supabase } from './supabaseClient';
 // import VisuallyHidden from '@reach/visually-hidden';
 type Props = {
   url: string,
-  size: number,
+  size: string,
   onUpload: (url: string) => void
 }
 
@@ -76,7 +76,7 @@ export default (props: Props | null) => {
       ) : (
         <>
           <label className="button primary block" htmlFor="single">
-            Upload an avatar
+            Upload
           </label>
           <span style="display:none">
             <input

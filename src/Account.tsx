@@ -88,7 +88,7 @@ const Account = (props: Props) => {
           <div className="form-widget">
             <Avatar
               url={avatar_url()}
-              size={150}
+              size={"150px"}
               onUpload={(url: string) => {
                 setAvatarUrl(url);
                 updateProfile({ username, website, avatar_url: url });
