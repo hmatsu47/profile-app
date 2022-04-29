@@ -23,12 +23,12 @@ export default () => {
       }
 
       if (data) {
-          setNotes(data.map(obj => obj.note));
+        setNotes(data.map(obj => obj.note));
       }
     } catch (error) {
       alert(error.message);
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   }
 
