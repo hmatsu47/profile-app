@@ -1,8 +1,8 @@
 import { createSignal, createEffect } from 'solid-js';
+import { Session } from '@supabase/supabase-js';
 import { supabase } from './supabaseClient';
 import Auth from './Auth';
 import Account from './Account';
-import { Session } from '@supabase/supabase-js';
 
 export default () => {
   const [session, setSession] = createSignal<Session | null>(null);
