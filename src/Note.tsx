@@ -68,9 +68,9 @@ export default () => {
       {loading() ? (
         'Saving ...'
       ) : (
-        <form onSubmit={addNotes} className="form-widget">
+        <form onSubmit={addNotes} class="form-widget">
             <div>
-              <label htmlFor="note">Note</label>
+              <label for="note">Note</label>
               <input
                 id="note"
                 type="text"
@@ -84,13 +84,13 @@ export default () => {
               />
             </div>
             <div>
-              <button className="button block primary" disabled={loading()}>
+              <button class="button block primary" disabled={loading()}>
                 Add note
               </button>
             </div>
             <div>
               <For each={notes()} fallback={<div></div>}>
-                {(note) => <div className="card">{note}</div>}
+                {(note) => <div class="card">{note}</div>}
               </For>
             </div>
             <div>

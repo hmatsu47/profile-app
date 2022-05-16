@@ -68,14 +68,14 @@ export default (props: Props | null) => {
       <img
         src={avatarUrl() !== '' ? avatarUrl() : `https://place-hold.it/${props!.size}x${props!.size}`}
         alt={avatarUrl() !== '' ? 'Avatar' : 'No image'}
-        className="avatar image"
+        class="avatar image"
         style={{ height: props!.size, width: props!.size }}
       />
       {uploading() ? (
         'Uploading...'
       ) : (
         <>
-          <label className="button primary block" htmlFor="single">
+          <label class="button primary block" for="single">
             Upload
           </label>
           <span style="display:none">

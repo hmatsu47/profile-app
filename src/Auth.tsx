@@ -21,18 +21,18 @@ export default function Auth() {
   }
 
   return (
-    <div className="row flex flex-center">
-      <div className="col-6 form-widget" aria-live="polite">
-        <h1 className="header">Supabase + SolidJS</h1>
-        <p className="description">Sign in via magic link with your email below</p>
+    <div class="row flex flex-center">
+      <div class="col-6 form-widget" aria-live="polite">
+        <h1 class="header">Supabase + SolidJS</h1>
+        <p class="description">Sign in via magic link with your email below</p>
         {loading() ? (
           'Sending magic link...'
         ) : (
           <form onSubmit={handleLogin}>
-            <label htmlFor="email">Email</label>
+            <label for="email">Email</label>
             <input
               id="email"
-              className="inputField"
+              class="inputField"
               type="email"
               placeholder="Your email"
               value={email()}
@@ -43,7 +43,7 @@ export default function Auth() {
                 setEmail(e.target.value);
               }}
             />
-            <button className="button block" aria-live="polite">
+            <button class="button block" aria-live="polite">
               Send magic link
             </button>
           </form>

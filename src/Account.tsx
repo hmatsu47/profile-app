@@ -1,5 +1,5 @@
-import { Session } from '@supabase/supabase-js';
 import { createSignal, createEffect, Accessor } from 'solid-js';
+import { Session } from '@supabase/supabase-js';
 import { supabase } from './supabaseClient';
 import Avatar from './Avatar';
 import Note from './Note';
@@ -85,7 +85,7 @@ const Account = (props: Props) => {
         'Saving ...'
       ) : (
         <>
-          <div className="form-widget">
+          <div class="form-widget">
             <Avatar
               url={avatar_url()}
               size={"150px"}
@@ -95,10 +95,10 @@ const Account = (props: Props) => {
               }}
             />
           </div>
-          <form onSubmit={updateProfile} className="form-widget">
+          <form onSubmit={updateProfile} class="form-widget">
             <div>Email: {props.session.user!.email}</div>
             <div>
-              <label htmlFor="username">Name</label>
+              <label for="username">Name</label>
               <input
                 id="username"
                 type="text"
@@ -112,7 +112,7 @@ const Account = (props: Props) => {
               />
             </div>
             <div>
-              <label htmlFor="website">Website</label>
+              <label for="website">Website</label>
               <input
                 id="website"
                 type="url"
@@ -126,17 +126,17 @@ const Account = (props: Props) => {
               />
             </div>
             <div>
-              <button className="button block primary" disabled={loading()}>
+              <button class="button block primary" disabled={loading()}>
                 Update profile
               </button>
             </div>
           </form>
-          <div className="form-widget">
+          <div class="form-widget">
             <Note />
           </div>
         </>
       )}
-      <button type="button" className="button block" onClick={() => supabase.auth.signOut()}>
+      <button type="button" class="button block" onClick={() => supabase.auth.signOut()}>
         Sign Out
       </button>
     </div>
